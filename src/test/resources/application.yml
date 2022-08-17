@@ -1,0 +1,21 @@
+spring:
+#  datasource:
+#    url: jdbc:h2:tcp://localhost/~/jpashop
+#    url: jdbc:h2:mem:test
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: create --> drop 후 create  create-drop 은 create -> drop 기본(create-drop)
+#    properties:
+#      hibernate:
+#          show_sql: true 이건 sysout 이라 안씀
+#        format_sql: true
+logging.level:
+  org.hibernate.SQL: debug # jpa 생성하는 sql 전체보임 log를 통해 찍어주기때문에 이걸사용.
+  org.hibernate.type: trace
+
+
+
