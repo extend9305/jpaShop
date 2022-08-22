@@ -29,6 +29,9 @@ public class OrderService {
         Member member = memberRepository.findOne(memberId);
         Item item = itemRepository.findOne(itemId);
 
+        //OrderItem,Delivery 는 cascade 옵션으로 persist 필요없이 order persist 될때 함께됨.
+        //==> 이러한 cascade 옵션은 order만 OrderItem,Delivery를 사용하고 다른곳에서 사용되지 않을때만 이렇게 함.
+
         //배송정보 생성
         Delivery delivery = new Delivery();
         delivery.setAddress(member.getAddress());
@@ -44,4 +47,19 @@ public class OrderService {
         return order.getId();
     }
 
+    /**
+     *주문 취소
+     */
+
+    @Transactional
+    public void cancelOrder(Long orderId){
+        //주문 엔티티 조회
+        Order order = orderRepository.findOne(orderId);
+        //주문 취소
+        order.cancel();
+    }
+    //검색
+//    public List<Order> findOrders(OrderSearch orderSearch){
+//        return orderRepository.findAll(orderSearch);
+//    }
 }

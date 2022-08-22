@@ -1,13 +1,16 @@
 package jpabook.jpashop.domain;
 
 import jpabook.jpashop.domain.item.Item;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem {
     @Id @GeneratedValue
     @Column(name = "order_item_id")
@@ -34,6 +37,10 @@ public class OrderItem {
         item.removeStock(count);
         return orderItem;
     }
+// 위의 생성메서드를 이용해서만 생성되어야 하기때문에 막음
+// 아래 생성자는 @NoArgsConstructor(access = AccessLevel.PROTECTED) 이걸로 대체가능
+//    protected OrderItem() {
+//    }
 
     //== 비즈니스 로직 //
     public void cancel() {

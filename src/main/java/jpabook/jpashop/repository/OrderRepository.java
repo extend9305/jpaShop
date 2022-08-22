@@ -1,13 +1,14 @@
 package jpabook.jpashop.repository;
 
-import jdk.jfr.Registered;
 import jpabook.jpashop.domain.Order;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
-@Registered
 @RequiredArgsConstructor
+@Repository
 public class OrderRepository {
     public final EntityManager em;
 
@@ -19,7 +20,16 @@ public class OrderRepository {
         return em.find(Order.class,id);
     }
 
-    //public List<Order> findAll(OrderSearch orderSearch){}
+    public List<Order> findAll(OrderSearch orderSearch){
+            return em.createQuery("select o from Order o join o.member m"+
+                    " where o.status = :status" +
+                    " and m.name like :name",Order.class)
+                    .setParameter("status",orderSearch.getOrderStatus())
+                    .setParameter("name",orderSearch.getMemberName())
+                    .setMaxResults(1000)
+                    //.setFirstResult() paging 최대1000건
+                    .getResultList();
+    }
 }
 
 
