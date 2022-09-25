@@ -16,5 +16,3 @@ logging.level:
   org.hibernate.SQL: debug # jpa 생성하는 sql 전체보임 log를 통해 찍어주기때문에 이걸사용.
   org.hibernate.type: trace
 
-
-
