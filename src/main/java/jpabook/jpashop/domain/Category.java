@@ -19,17 +19,10 @@ public class Category {
 
     // 테이블은 1:다 대대1로 풀어내야함.
     //실전에서 쓰지않음.
-
-
-
-
-
     @ManyToMany
     @JoinTable(name = "category_item",
-
             joinColumns = @JoinColumn(name="category_id"),
             inverseJoinColumns = @JoinColumn(name = "item_id"))
-
     private List<Item> items = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
